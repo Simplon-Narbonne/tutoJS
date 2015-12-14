@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tuto Javascript</title>
+  </head>
+  <body>
+    <div class="chapitre1">
+      <h2><em><u>I) Comment ecrire une adresse mail valide dans un champs?</u></em></h2>
+      <p>
+        Pour vérifier si l'utilisateur a rentré une adresse mail valide.
+        on doit crée une fonction  donc on commence par mettre un "<span style="color: #FF00CC;">function</span> Verifier".<br/>
+        <pre>
+          '<span style="color: #FF00CC;">function</span>' car on crée une fonction
+          'Vérifier' car c'est le nom qu'on lui donne (ex: on pourrai marqué blabla comme nom)
+        </pre>
+        Ensuite on doit se poser les bonnes questions, j'ai crée ma fonction je veux quoi exactement?<br/>
+        Je veux chercher le champ que l'utilisateur dans lequel il a rentré sont adresse mail et ensuite vérifié si il a bien mis le '@' dans sont adresse mail.<br/>
+        <br/>
+        Donc on crée un 'if' (=si) qui fera une action si la condition est validée et un 'else' (=sinon) qui fera une autre action quand la condition n'est pas remplie.<br/>
+        On crée un 'if' qui va chercher les conditions de notre adresse mail qui sera <mark style="background-color: #0066FF;">("@",0) < 0)</mark> et cette derniere va
+        chercher la valeur (<mark style="background-color: #8A2BE2;">.value</mark>) de notre champ dans notre formulaire donc <mark style="background-color: #008000;">form</mark>.
+        email1<mark style="background-color: #8A2BE2;">.value</mark> (c'est son identifiant dans le html) puis on veut savoir si dans l'adresse mail il y a un '@'.
+        Donc dans la condition, on marque entre guillemet ('' '') la valeur (ou le mot) à rechercher, puis on dit que si il trouve le mot a chercher, la condition valider,
+        il rajoute un '1' qui va se mettre a la place du 1er '0' il sera superieur à 0 donc du coup la condition sera vrai et le code s'exécutera :
+      </p>
+      <pre>
+        <span style="color: #FF00CC;">function</span> Verifier() {
+          if (<mark style="background-color: #008000;">form</mark>.email1<mark style="background-color: #8A2BE2;">.value</mark>.indexOf<mark style="background-color: #0066FF;">("@",0) < 0) < 0)</mark>{
+          }
+        }
+      </pre>
+      <p>
+        Par la suite on rajoute une <mark style="background-color: #FF00FF;">alert</mark> pour dire que sont adresse mail est bien validé :
+      </p>
+      <pre>
+        function Verifier() {
+          if (form.email1.value.indexOf("@",0) < 0){
+            <mark style="background-color: #FF00FF;">alert</mark>('Adresse mail Valide');
+          }
+        }
+      </pre>
+      <p>
+        Sauf que si l'utilisateur a pas correctement rentré sont adresse mail, il faut le lui dire, donc on met un <mark style="background-color: #DAA520;">else</mark>
+        et on rajoute une <mark style="background-color: #FF00FF;">alert</mark> pour le lui dire :
+      </p>
+      <pre>
+        function Verifier() {
+          if (form.email1.value.indexOf("@",0) < 0){
+            alert('Adresse mail Valide');
+          }
+          <mark style="background-color: #DAA520;">else</mark>{
+            <mark style="background-color: #FF00FF;">alert</mark>('Veuillez entrer une adresse mail valide');
+          }
+        }
+      </pre>
+      <p>
+        Voila c'est fini, il faut bien penser que les id sont personnels et non mettre 'email1' absolument (ou de lui donné comme nom email1 si vous voulez faire pareil),
+        et de bien faire appel a sa fonction dans html avec 'errorEmail()' (ou vous pouvez toujours lui donné un autre nom).
+      </p>
+    </div>
+    <br/><br/>
+    <div class="chapitre2">
+      <h2><em><u>II) Mettre en place des conditions pour l'ecriture d'un mot de passe</u></em></h2>
+        <p>Pour mettre en place des condition au mot de passe on commence à ajouter un 'pattern' à notre champ dédié au mot de passe dans le html :</p>
+        <pre>
+          &lt;input id="motdepasse1" class="pass" type="password" name="motdepasse" <mark style="background-color:red">pattern='(.*{4,}[0-9]{2,})</mark>' placeholder="Saisissez un mot de passe..." required size="30"/&gt;
+        </pre>
+        <p>Pour ce pattern <mark style="background-color:red">(.*{4,}[0-9]{2,}) :</mark><br/>
+          - '.*' correspond au caractères d'écritures normaux (lettres: a, b, ...) et les caractères spéciaux (ex: &, #, -, ...)<br/>
+          - '{4,}' correspond au nombres de caractères minimum a rentrer pour le '.*'<br/>
+          - '[0-9]' correspond au caractères numérique (chiffres de 0 à 9)<br/>
+          - '{2,}' correspond au nombres de caractères minimum a rentrer pour les caractères numériques (chiffres)
+        </p>
+        <br>
+        <p>
+          Coté JavaScript, on commence par créé une fonction '<span style="color: #FF00CC;">function</span> validationMdp'.<br/>
+          Ensuite on ajoute un 'if', qui prend en compte ce qui est ecrit dans le champ du mot de passe avec le <mark>document.getElementById('motdepasse1')</mark>
+          et on met <mark style="background-color: orange;">.checkValidity()</mark> (qui sert a mettre un true (=vrai) quand la condition est juste et un false (=faux)
+          quand la condition est fausse) pour pouvoir faire une action differente en fonction de ce qui est rentrer :
+        </p>
+        <pre>
+          <span style="color: #FF00CC;">function</span> validationMdp(){
+            if<mark>(document.getElementById('motdepasse1')</mark>. <mark style="background-color: orange;">.checkValidity()</mark>{
+            }
+          }
+        </pre>
+        <p>
+          Donc on ajoute une <mark style="background-color:#FF00FF ">alert</mark> dans le 'if' pour dire à l'utilisateur que son mot de passe est correct :
+        </p>
+        <pre>
+          function validationMdp(){
+            if(document.getElementById('motdepasse1').checkValidity()){
+              <mark style="background-color:#FF00FF ">alert</mark>('Votre mot de passe est correct');
+            }
+          }
+        </pre>
+        <p>
+          Sauf que si l'utilisateur n'a pas correctement suivi les condition on ajoute un <mark style='background-color:#D2691E '>else</mark> (sinon) et on rajoute une <mark style="background-color:#FF00FF ">alert</mark> pour le lui dire :
+        </p>
+        <pre>
+          function validationMdp(){
+            if(document.getElementById('motdepasse1').checkValidity()){
+              alert('Votre mot de passe est correct');
+            }
+            <mark style='background-color:#D2691E '>else</mark>{
+              <mark style="background-color:#FF00FF ">alert</mark>('Votre mot de passe doit contenir 6 caractères dont 2 chiffres');
+            }
+          }
+        </pre>
+        <p>
+          Donc voila comment on fait pour donner des conditions a un mot de passe donc on se retrouve pour la troisieme partie.
+        </p>
+    </div>
+    <br/><br/>
+    <div class="chapitre3">
+      <h2><em><u>III) Faire en sorte que le mot de passe et la confirmation rentrés soit identiques</u></em></h2>
+      <p>
+        Pour commencer on créé la fonction '<span style="color: #FF00CC;">function</span> samePassword'.<br/>
+        Pour vérifier si deux valeurs <mark style="background-color: #8A2BE2;">.value</mark> inscrites dans deux champs différents du
+        formulaire form sont identique on utilise <mark style="background-color: orange;">==</mark> <span style="color: grey;">*</span> :
+      </p>
+      <pre>
+        <span style="color: #FF00CC;">function</span> samePassword(){
+            if ((<mark style="background-color: #008000;">form</mark>.motdepasse1<mark style="background-color: #8A2BE2;">.value</mark> <mark style="background-color: orange;">==</mark> (<mark style="background-color: #008000;">form</mark>.confirmationmdp1<mark style="background-color: #8A2BE2;">.value</mark>){
+            }
+        }
+      </pre>
+      <p>
+        Ensuite on rajoute une <mark style="background-color:#FF00FF ">alert</mark> dans le 'if' pour dire à l'utilisateur si ses mots de passes sont identiques :
+      </p>
+      <pre>
+        function samePassword(){
+          if (form.motdepasse1.value == form.confirmationmdp1.value){
+            <mark style="background-color:#FF00FF ">alert</mark>('Le mot de passe est identique');
+          }
+        }
+      </pre>
+      <p>
+        Sauf que si l'utilisateur n'a pas correctement réécrit son mot de passe on ajoute un <mark style='background-color:#D2691E '>else</mark> (sinon)
+        et on rajoute une <mark style="background-color:#FF00FF ">alert</mark> pour le lui dire :
+      </p>
+      <pre>
+        function samePassword(){
+          if (form.motdepasse1.value == form.confirmationmdp1.value){
+            alert('Le mot de passe est identique');
+          }
+          <mark style='background-color:#D2691E '>else</mark>{
+            <mark style="background-color:#FF00FF ">alert</mark>('Le mot de passe est different de celui que vous avez choisi');
+          }
+        }
+      </pre>
+      <p style="color: grey;">
+        * Pour les autres opérateurs de comparaisons allez voir le tableaux en bas de page.
+      </p>
+    </div>
+    <div class="chapitre4">
+      <h2><em><u>IV) Faire en sorte qu'un champ ne soit pas vide lors de la validation de l'inscription</u></em></h2>
+      <p>
+        Si le champ n'est pas rempli un message d'alerte s'affiche.<br>
+        Pour commencer on va créer une fonction '<span style="color: #FF00CC;">function</span> errorLogin()' pour verifier si le login a remplir est bien rempli,
+        donc pour cela on utilise <mark style="background-color: orange;">==</mark> 0 pour savoir si le champ choisi est vide ou pas.
+      </p>
+      <pre>
+        <span style="color: #FF00CC;">function</span> errorLogin(){
+          if(form.login1.value == 0){
+            alert('Le champ n'est pas remplis');
+          }
+        }
+      </pre>
+      <p>
+        Si la valeur <mark style="background-color: #8A2BE2;">.value</mark> dans le champ est nulle on affiche une <mark style="background-color:#FF00FF ">alert</mark>
+        pour prévenir l'utilisateur qu'il doit le remplir :
+      </p>
+      <pre>
+        function errorLogin(){
+          if(form.login1.value == 0){
+            <mark style="background-color:#FF00FF ">alert</mark>('Le champ n'est pas remplis');
+          }
+        }
+      </pre>
+      <p>
+        Par contre si le champ est rempli on utilise un <mark style='background-color:#D2691E '>else</mark> (sinon)
+        et on rajoute une <mark style="background-color:#FF00FF ">alert</mark> pour le lui dire :
+      </p>
+      <pre>
+        function errorLogin(){
+          if(form.login1.value == 0){
+            alert('Le champ n'est pas remplis');
+          }
+          <mark style='background-color:#D2691E '>else</mark>{
+            <mark style="background-color:#FF00FF ">alert</mark>('Le champ est rempli correctement);
+          }
+        }
+      </pre>
+      <p>
+        Merci d'avoir suivis notre tuto et à la prochaine.
+      </p>
+    </div>
+    <p>
+      Lien Github vers <a target="_blank" href="https://github.com/simplon-alexisr/Formulaire" style="text-decoration: none; color: blue;"><em><u>le formulaire complet</u></em></a> comprenant le HTML/CSS/JAVASCRIPT
+    </p>
+    <table class="tableau" style="border: 1px solid black; text-align: center;">
+      <tr style="border: 1px solid black;">
+        <td style="border: 1px solid black; background-color: orange;">Opérateurs</td>
+        <td style="border: 1px solid black; background-color: orange;">Signification</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;">==</td>
+        <td style="border: 1px solid black;">Egale à</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;">!=</td>
+        <td style="border: 1px solid black;">Différent de</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;">===</td>
+        <td style="border: 1px solid black;">Contenu et type egale à</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;">!==</td>
+        <td style="border: 1px solid black;">Contenu et type différent de</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;">&#62</td>
+        <td style="bordefunction errorLogin(){
+  if(form.login1.value == 0){
+    document.getElementById('login2').style.opacity = "1";
+  }
+  else{
+    document.getElementById('login2').style.opacity = "0";
+  }
+}r: 1px solid black;">Supérieur</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;">&#62=</td>
+        <td style="border: 1px solid black;">Supérieur ou égale à</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;">&#60</td>
+        <td style="border: 1px solid black;">Inférieur à</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;">&#60=</td>
+        <td style="border: 1px solid black;">Inférieur</td>
+      </tr>
+    </table>
+    <p>
+      Tuto fait par: DELOS Emmanuel, NANGUET Jérome et RAFFIN Alexis.
+    </p>
+  </body>
+</html>
